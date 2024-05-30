@@ -1,0 +1,60 @@
+name: Packaging for Windows
+
+on: 
+  workflow_dispatch:
+    inputs:
+      reference:
+        description: 'Tag/Branch/SHA1'
+        required: true
+        default: 'windows-executable'
+
+
+jobs:
+  build-packaging:
+    runs-on: windows-2022
+
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+      - name: Installation of dependencies
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: false
+          release: true
+          install: >-
+            mingw-w64-x86_64-toolchain mingw-w64-x86_64-gcc mingw-w64-x86_64-gcc-fortran
+            mingw-w64-x86_64-cmake mingw-w64-x86_64-doxygen
+            mingw-w64-x86_64-boost mingw-w64-x86_64-gdal mingw-w64-x86_64-curl-winssl
+            mingw-w64-x86_64-qt5 mingw-w64-x86_64-openssl
+            git p7zip mingw-w64-x86_64-gnuplot mingw-w64-x86_64-graphviz
+
+      - name: Checkout of source code
+        uses: actions/checkout@v3
+      
+      - name: Preparation
+        run: mkdir ./_build_release
+      
+      - name: Configuration
+        run: cmake .. -G "MSYS Makefiles" -DOFBUILD_ENABLE_DOCS=OFF
+        working-directory: ./_build_release
+      
+      - name: Build
+        run: |
+          export OPENFLUID_INSTALL_PREFIX=`pwd`/dist
+          export PATH=$OPENFLUID_INSTALL_PREFIX/bin:$OPENFLUID_INSTALL_PREFIX/lib:$PATH
+          cmake --build . --target ALL_BUILD --config Release
+        working-directory: ./_build_release
+
+      - name: Packaging
+        run: cpack --config ./_build_release/CPackConfig.cmake
+        working-directory: ./_build_release
+      
+      - name: Uploading artifacts
+        uses: actions/upload-artifact@v4
+        with: 
+          name: openfluid_windows.exe
+          path: ./_build_release/openfluid*
+          if-no-files-found: error
