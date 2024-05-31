@@ -39,18 +39,25 @@ jobs:
         run: mkdir ./_build_release
       
       - name: Configuration
-        run: cmake .. -G "MSYS Makefiles" -DOFBUILD_ENABLE_DOCS=OFF
+        run: cmake .. -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=.
         working-directory: ./_build_release
       
+      # - name: Build
+      #   run: |
+      #     export OPENFLUID_INSTALL_PREFIX=`pwd`/dist
+      #     export PATH=$OPENFLUID_INSTALL_PREFIX/bin:$OPENFLUID_INSTALL_PREFIX/lib:$PATH
+      #     cmake --build . --target ALL_BUILD --config Release
+      #   working-directory: ./_build_release
+
       - name: Build
         run: |
           export OPENFLUID_INSTALL_PREFIX=`pwd`/dist
           export PATH=$OPENFLUID_INSTALL_PREFIX/bin:$OPENFLUID_INSTALL_PREFIX/lib:$PATH
-          cmake --build . --target ALL_BUILD --config Release
+          make -j 8
         working-directory: ./_build_release
 
       - name: Packaging
-        run: cpack --config ./_build_release/CPackConfig.cmake
+        run: cpack -G NSIS
         working-directory: ./_build_release
       
       - name: Uploading artifacts
