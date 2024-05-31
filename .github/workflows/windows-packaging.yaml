@@ -34,13 +34,22 @@ jobs:
 
       - name: Checkout of source code
         uses: actions/checkout@v3
+
+      - name: Show Paths
+        run: |
+          find C:\ -name windeployqt
+          find C:/ -name windeployqt
+          find D:\ -name windeployqt
+          find D:/ -name windeployqt
+          find \ -name windeployqt
+          find / -name windeployqt
       
-      - name: Preparation
-        run: mkdir ./_build_release
+      # - name: Preparation
+      #   run: mkdir ./_build_release
       
-      - name: Configuration
-        run: cmake .. -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=.
-        working-directory: ./_build_release
+      # - name: Configuration
+      #   run: cmake .. -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=.
+      #   working-directory: ./_build_release
       
       # - name: Build
       #   run: |
@@ -49,16 +58,16 @@ jobs:
       #     cmake --build . --target ALL_BUILD --config Release
       #   working-directory: ./_build_release
 
-      - name: Build
-        run: |
-          export OPENFLUID_INSTALL_PREFIX=`pwd`/dist
-          export PATH=$OPENFLUID_INSTALL_PREFIX/bin:$OPENFLUID_INSTALL_PREFIX/lib:$PATH
-          make -j 8
-        working-directory: ./_build_release
+      # - name: Build
+      #   run: |
+      #     export OPENFLUID_INSTALL_PREFIX=`pwd`/dist
+      #     export PATH=$OPENFLUID_INSTALL_PREFIX/bin:$OPENFLUID_INSTALL_PREFIX/lib:$PATH
+      #     make -j 8
+      #   working-directory: ./_build_release
 
-      - name: Packaging
-        run: cpack -G NSIS
-        working-directory: ./_build_release
+      # - name: Packaging
+      #   run: cpack -G NSIS
+      #   working-directory: ./_build_release
       
       # - name: Uploading artifacts
       #   uses: actions/upload-artifact@v4
@@ -67,9 +76,9 @@ jobs:
       #     path: ./_build_release/openfluid*
       #     if-no-files-found: error
 
-      - name: Uploading artifacts
-        uses: actions/upload-artifact@v4
-        with: 
-          name: openfluid_windows.exe
-          path: ./_build_release/
-          if-no-files-found: error
+      # - name: Uploading artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with: 
+      #     name: openfluid_windows.exe
+      #     path: ./_build_release/
+      #     if-no-files-found: error
