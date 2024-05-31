@@ -1,13 +1,14 @@
 name: Packaging for Windows
 
-on: 
-  workflow_dispatch:
-    inputs:
-      reference:
-        description: 'Tag/Branch/SHA1'
-        required: true
-        default: 'windows-executable'
+# on: 
+#   workflow_dispatch:
+#     inputs:
+#       reference:
+#         description: 'Tag/Branch/SHA1'
+#         required: true
+#         default: 'windows-executable'
 
+on: [push]
 
 jobs:
   build-packaging:
