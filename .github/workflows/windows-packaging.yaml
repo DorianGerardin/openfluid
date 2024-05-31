@@ -39,8 +39,8 @@ jobs:
 
       - name: Show Paths
         run: |
-          find /c -name windeployqt &&
-          find /d -name windeployqt &&
+          find /c -name windeployqt
+          find /d -name windeployqt
           find / -name windeployqt
       
       # - name: Preparation
