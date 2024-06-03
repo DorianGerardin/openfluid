@@ -32,13 +32,17 @@ jobs:
           #   mingw-w64-x86_64-qt5 mingw-w64-x86_64-openssl
           #   git p7zip mingw-w64-x86_64-gnuplot mingw-w64-x86_64-graphviz base-devel
           install: >-
-            mingw-w64-x86_64-qt5 base-devel
+            mingw-w64-x86_64-qt5
 
       - name: Checkout of source code
         uses: actions/checkout@v3
 
+      - name: Ensure tree is installed
+        run: |
+          pacman -Sy --noconfirm tree
+
       - name: Show Paths
-        run: find /mingw64/bin -name windeployqt
+        run: tree /mingw64/bin
       
       # - name: Preparation
       #   run: mkdir ./_build_release
