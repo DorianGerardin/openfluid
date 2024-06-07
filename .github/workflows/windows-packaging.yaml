@@ -20,11 +20,21 @@ jobs:
 
     steps:
 
-      - uses: actions/download-artifact@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Uploading windeployqtTest
+        uses: actions/upload-artifact@v4
+        with: 
+          name: windeployqtTest
+          path: ./resources/packaging/windows
+          if-no-files-found: error
+
+      - name: Downloading windeployqtTest
+        uses: actions/download-artifact@v4
         with:
-          name: windeployqtTest.exe
+          name: windeployqtTest
           path: /mingw64/bin/
-          repository: $GITHUB_WORKSPACE/resources/packaging/windows
 
       - name: Ensure tree is installed
         run: |
