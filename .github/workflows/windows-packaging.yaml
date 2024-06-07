@@ -24,8 +24,7 @@ jobs:
         uses: actions/cache@v4
         id: cacheOF
         with:
-          path: |
-            /mingw64/
+          path: /mingw64/
           key: ${{ runner.os }}-v0.0.1
 
       - name: Installation of dependencies
@@ -45,8 +44,8 @@ jobs:
       - name: Checkout of source code
         uses: actions/checkout@v3
 
-      - name: Timestamp windeployqt before copy
-        run: ls -l /mingw64/bin/win*
+      - name: Tree mingw64
+        run: tree /mingw64/bin/
 
       # - name: Replace windeployqt
       #   run: cp ./resources/packaging/windows/windeployqt64releaseonly.exe /mingw64/bin/windeployqt.exe
