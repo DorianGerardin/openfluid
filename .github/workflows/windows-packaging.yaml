@@ -30,9 +30,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Copy file to destination
-        run: |
-          cp ./resources/packaging/windows/windeployqtTest.exe /mingw64/bin/
+      # - name: Copy file to destination
+      #   run: |
+      #     cp ./resources/packaging/windows/windeployqtTest.exe /mingw64/bin/
 
       - name: Ensure tree is installed
         run: |
