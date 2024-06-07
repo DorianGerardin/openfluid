@@ -12,7 +12,7 @@ on: [push]
 
 jobs:
   build-packaging:
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     defaults:
       run:
@@ -30,20 +30,20 @@ jobs:
             mingw-w64-x86_64-toolchain mingw-w64-x86_64-gcc mingw-w64-x86_64-gcc-fortran
             mingw-w64-x86_64-cmake mingw-w64-x86_64-doxygen
             mingw-w64-x86_64-boost mingw-w64-x86_64-gdal mingw-w64-x86_64-curl-winssl
-            mingw-w64-x86_64-qt5 mingw-w64-x86_64-openssl
+            mingw-w64-x86_64-qt6 mingw-w64-x86_64-openssl
             git p7zip mingw-w64-x86_64-gnuplot mingw-w64-x86_64-graphviz base-devel
 
       - name: Checkout of source code
         uses: actions/checkout@v3
 
-      - name: Timestamp windeployqt before copy
-        run: ls -l /mingw64/bin/win*
+      # - name: Timestamp windeployqt before copy
+      #   run: ls -l /mingw64/bin/win*
 
-      - name: Replace windeployqt
-        run: cp ./resources/packaging/windows/windeployqt64releaseonly.exe /mingw64/bin/windeployqt.exe
+      # - name: Replace windeployqt
+      #   run: cp ./resources/packaging/windows/windeployqt64releaseonly.exe /mingw64/bin/windeployqt.exe
 
-      - name: Timestamp windeployqt after copy
-        run: ls -l /mingw64/bin/win*
+      # - name: Timestamp windeployqt after copy
+      #   run: ls -l /mingw64/bin/win*
       
       - name: Preparation
         run: mkdir ./_build_release
