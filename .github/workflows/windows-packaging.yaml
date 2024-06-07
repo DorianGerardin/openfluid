@@ -24,7 +24,7 @@ jobs:
         with:
           name: windeployqtTest.exe
           path: /mingw64/bin/
-          repository: ./resources/packaging/windows
+          repository: $GITHUB_WORKSPACE/resources/packaging/windows
 
       - name: Ensure tree is installed
         run: |
