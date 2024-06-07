@@ -55,7 +55,7 @@ jobs:
       #   run: ls -l /mingw64/bin/win*
 
       - name: Copy lrelease
-        run: cp mingw64/bin/lrelease-qt6.exe /mingw64/bin/lrelease.exe
+        run: cp /mingw64/bin/lrelease-qt6.exe /mingw64/bin/lrelease.exe
       
       - name: Preparation
         run: mkdir ./_build_release
