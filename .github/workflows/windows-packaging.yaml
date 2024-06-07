@@ -20,7 +20,16 @@ jobs:
 
     steps:
 
+      - name: Setup Cache
+        uses: actions/cache@v4
+        id: cacheOF
+        with:
+          path: |
+            /mingw64/
+          key: ${{ runner.os }}-v0.0.1
+
       - name: Installation of dependencies
+        if: steps.cacheOF.outputs.cache-hit != 'true'
         uses: msys2/setup-msys2@v2
         with:
           msystem: MINGW64
@@ -44,6 +53,11 @@ jobs:
 
       # - name: Timestamp windeployqt after copy
       #   run: ls -l /mingw64/bin/win*
+
+      - name: Install lrelease
+        run: |
+          qtchooser -install qt6 $(which qmake6)
+          export QT_SELECT=qt6
       
       - name: Preparation
         run: mkdir ./_build_release
