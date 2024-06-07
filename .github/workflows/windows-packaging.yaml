@@ -36,11 +36,14 @@ jobs:
       - name: Checkout of source code
         uses: actions/checkout@v3
 
+      - name: Timestamp windeployqt before copy
+        run: ls -l /mingw64/bin/win*
+
       - name: Replace windeployqt
         run: cp ./resources/packaging/windows/windeployqt64releaseonly.exe /mingw64/bin/windeployqt.exe
 
-      - name: list mingw64 bin
-        run: ls /mingw64/bin
+      - name: Timestamp windeployqt after copy
+        run: ls -l /mingw64/bin/win*
       
       - name: Preparation
         run: mkdir ./_build_release
