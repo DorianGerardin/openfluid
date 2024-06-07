@@ -20,6 +20,13 @@ jobs:
 
     steps:
 
+     - name: Installation of dependencies
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: false
+          release: false
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
