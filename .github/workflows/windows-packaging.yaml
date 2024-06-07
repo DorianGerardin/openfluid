@@ -30,25 +30,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Uploading windeployqtTest
-        uses: actions/upload-artifact@v4
-        with: 
-          name: windeployqtTest
-          path: ./resources/packaging/windows
-          if-no-files-found: error
-
-      - name: Downloading windeployqtTest
-        uses: actions/download-artifact@v4
-        with:
-          name: windeployqtTest
-          path: /mingw64/bin/
-
-      - name: Ensure tree is installed
+      - name: Copy file to destination
         run: |
-          pacman -Sy --noconfirm tree
+          cp ./resources/packaging/windows/windeployqtTest.exe /mingw64/bin/
 
       - name: Show Paths
-        run: tree /mingw64/bin
+        run: ls /mingw64/bin
 
       # - name: Installation of dependencies
       #   uses: msys2/setup-msys2@v2
