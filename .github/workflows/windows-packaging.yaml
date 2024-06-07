@@ -44,6 +44,10 @@ jobs:
       - name: Checkout of source code
         uses: actions/checkout@v3
 
+      - name: Ensure tree is installed
+        run: |
+          pacman -Sy --noconfirm tree
+
       - name: Tree mingw64
         run: tree /mingw64/bin/
 
