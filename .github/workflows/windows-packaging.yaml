@@ -34,8 +34,12 @@ jobs:
         run: |
           cp ./resources/packaging/windows/windeployqtTest.exe /mingw64/bin/
 
+      - name: Ensure tree is installed
+        run: |
+          pacman -Sy --noconfirm tree
+
       - name: Show Paths
-        run: ls /mingw64/bin
+        run: tree /mingw64/bin
 
       # - name: Installation of dependencies
       #   uses: msys2/setup-msys2@v2
