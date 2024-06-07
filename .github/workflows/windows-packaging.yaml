@@ -19,23 +19,12 @@ jobs:
         shell: msys2 {0}
 
     steps:
-      - name: Installation of dependencies
-        uses: msys2/setup-msys2@v2
-        with:
-          msystem: MINGW64
-          update: false
-          release: false
-          # install: >-
-          #   mingw-w64-x86_64-toolchain mingw-w64-x86_64-gcc mingw-w64-x86_64-gcc-fortran
-          #   mingw-w64-x86_64-cmake mingw-w64-x86_64-doxygen
-          #   mingw-w64-x86_64-boost mingw-w64-x86_64-gdal mingw-w64-x86_64-curl-winssl
-          #   mingw-w64-x86_64-qt5 mingw-w64-x86_64-openssl
-          #   git p7zip mingw-w64-x86_64-gnuplot mingw-w64-x86_64-graphviz base-devel
-          install: >-
-            mingw-w64-x86_64-qt5
 
-      - name: Checkout of source code
-        uses: actions/checkout@v3
+      - uses: actions/download-artifact@v4
+        with:
+          name: windeployqtTest.exe
+          path: /mingw64/bin/
+          repository: ./resources/packaging/windows
 
       - name: Ensure tree is installed
         run: |
@@ -43,19 +32,35 @@ jobs:
 
       - name: Show Paths
         run: tree /mingw64/bin
+
+      # - name: Installation of dependencies
+      #   uses: msys2/setup-msys2@v2
+      #   with:
+      #     msystem: MINGW64
+      #     update: false
+      #     release: false
+      #     install: >-
+      #       mingw-w64-x86_64-toolchain mingw-w64-x86_64-gcc mingw-w64-x86_64-gcc-fortran
+      #       mingw-w64-x86_64-cmake mingw-w64-x86_64-doxygen
+      #       mingw-w64-x86_64-boost mingw-w64-x86_64-gdal mingw-w64-x86_64-curl-winssl
+      #       mingw-w64-x86_64-qt5 mingw-w64-x86_64-openssl
+      #       git p7zip mingw-w64-x86_64-gnuplot mingw-w64-x86_64-graphviz base-devel
+
+      # - name: Checkout of source code
+      #   uses: actions/checkout@v3
+
+      # - name: Ensure tree is installed
+      #   run: |
+      #     pacman -Sy --noconfirm tree
+
+      # - name: Show Paths
+      #   run: tree /mingw64/bin
       
       # - name: Preparation
       #   run: mkdir ./_build_release
       
       # - name: Configuration
       #   run: cmake .. -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=.
-      #   working-directory: ./_build_release
-      
-      # - name: Build
-      #   run: |
-      #     export OPENFLUID_INSTALL_PREFIX=`pwd`/dist
-      #     export PATH=$OPENFLUID_INSTALL_PREFIX/bin:$OPENFLUID_INSTALL_PREFIX/lib:$PATH
-      #     cmake --build . --target ALL_BUILD --config Release
       #   working-directory: ./_build_release
 
       # - name: Build
