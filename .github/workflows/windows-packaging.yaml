@@ -12,7 +12,7 @@ on: [push]
 
 jobs:
   build-packaging:
-    runs-on: windows-2022
+    runs-on: windows-2019
 
     defaults:
       run:
