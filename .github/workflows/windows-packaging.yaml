@@ -39,7 +39,7 @@ jobs:
             mingw-w64-x86_64-toolchain mingw-w64-x86_64-gcc mingw-w64-x86_64-gcc-fortran
             mingw-w64-x86_64-cmake mingw-w64-x86_64-doxygen
             mingw-w64-x86_64-boost mingw-w64-x86_64-gdal mingw-w64-x86_64-curl-winssl
-            mingw-w64-x86_64-qt6 mingw-w64-x86_64-qtchooser mingw-w64-x86_64-openssl
+            mingw-w64-x86_64-qt6 mingw-w64-x86_64-openssl
             git p7zip mingw-w64-x86_64-gnuplot mingw-w64-x86_64-graphviz base-devel
 
       - name: Checkout of source code
@@ -54,10 +54,8 @@ jobs:
       # - name: Timestamp windeployqt after copy
       #   run: ls -l /mingw64/bin/win*
 
-      - name: Install lrelease
-        run: |
-          qtchooser -install qt6 $(which qmake6)
-          export QT_SELECT=qt6
+      - name: Copy lrelease
+        run: cp mingw64/bin/lrelease-qt6.exe /mingw64/bin/lrelease.exe
       
       - name: Preparation
         run: mkdir ./_build_release
