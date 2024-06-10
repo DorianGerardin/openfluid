@@ -39,7 +39,7 @@ ENDIF()
 
 
 # Qt
-SET(WINDEPLOYQT_COMMAND "windeployqt-qt6")
+SET(WINDEPLOYQT_COMMAND "windeployqt6")
 
 SET(WINDEPLOYQT_TARGETS openfluid)
 

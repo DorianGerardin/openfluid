@@ -231,8 +231,9 @@ ENDIF()
 
 ################## packaging ##################
 
-INCLUDE(CPack.in.cmake)
+INCLUDE(InstallRequiredSystemLibraries)
 
+INCLUDE(CPack.in.cmake)
 
 # Installation of common files
 INSTALL(FILES "LICENSE" "AUTHORS.md" "README.md" "CHANGELOG.md"
