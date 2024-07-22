@@ -18,6 +18,7 @@ SET(OPENFLUID_UI_COMMON_CPP AppMainWindow.cpp OpenFLUIDDialog.cpp
                             PreferencesDialog.cpp DetectQtDevToolsDialog.cpp
                             TimePeriodWidget.cpp
                             WareIssuesManagerWidget.cpp  WareshubIssueDialog.cpp
+                            MapScene.cpp MapView.cpp MapItemGraphics.cpp
                             )
 
 SET(OPENFLUID_UI_COMMON_HPP AppMainWindow.hpp OpenFLUIDDialog.hpp 
@@ -40,6 +41,7 @@ SET(OPENFLUID_UI_COMMON_HPP AppMainWindow.hpp OpenFLUIDDialog.hpp
                             TimePeriodWidget.hpp
                             UIHelpers.hpp
                             WareIssuesManagerWidget.hpp  WareshubIssueDialog.hpp
+                            MapScene.hpp MapView.hpp MapItemGraphics.hpp
                             )
 
 
