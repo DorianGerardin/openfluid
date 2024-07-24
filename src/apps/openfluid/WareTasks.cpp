@@ -477,8 +477,9 @@ int WareTasks::processDocalyze() const
     Docalyzer.performDocalyze(m_Cmd.isOptionActive("keep-data"),m_Cmd.isOptionActive("include-empty-fields"));
   }
   catch(const openfluid::base::FrameworkException& E)
-  {
+  { 
     if(std::string(E.what()).find("not installed") != std::string::npos) //TOIMPL Replace by custom exception
+                                                                         // #framework (2.2.x)
     {
       return errorByCode(openfluid::config::RETURN_CODE_DEPENDENCY_ISSUE, E.what());
     }

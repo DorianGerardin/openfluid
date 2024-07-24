@@ -145,7 +145,8 @@ class OPENFLUID_API WareSignatureSerializer
 
     const std::string m_LinkUID;
 
-    // TOIMPL review and refactor methods names, responsibilities and organization for better consistency
+    // TOIMPL review and refactor methods names, responsibilities and organization for better consistency 
+    // #framework (2.2.x)
 
     static std::string getHead(const std::string CommentChar);
 

@@ -615,7 +615,7 @@ std::map<openfluid::ware::WareType, QStringList> WaresSrcImportDialog::getSelect
 
 void WaresSrcImportDialog::onImportAsked()
 {
-  //FIXME black rectangle shortly covering progress dialog during initializing?
+  //FIXME black rectangle shortly covering progress dialog during initializing? #framework (2.2.0)
   if (!check())
   {
     return;

@@ -145,7 +145,7 @@ bool GitUIProxy::launchAuthCommand(QStringList Args, const QString& FromUrl, con
   }
 
   // Manual check if .git/index.lock detected (meaning that another git process is already running)
-  // HACK see if removable for release
+  // HACK see if removable for release #devstudio (2.2.0)
   if (!WorkingDirectory.isEmpty())
   {
     openfluid::tools::FilesystemPath GitIndexLockPath = 
@@ -157,7 +157,7 @@ bool GitUIProxy::launchAuthCommand(QStringList Args, const QString& FromUrl, con
       emit error(tr(ErrorMsg.c_str()));
       return false;
     }
-    else // HACK for debugging purpose, to remove before release
+    else // HACK for debugging purpose, to remove before release #devstudio (2.2.0)
     {
       openfluid::utils::log::debug("Git", 
                                    "git lock not detected here: "+WorkingDirectory.toStdString());
@@ -379,7 +379,7 @@ bool GitUIProxy::clone(const QString& FromUrl, const QString& ToPath,
 
 bool GitUIProxy::checkout(const QString& Path, const QString& BranchName, bool New)
 {
-  //TOIMPL test this function?
+  //TOIMPL test this function? / #devstudio, #test (2.2.0)
   
   if (New)
   {

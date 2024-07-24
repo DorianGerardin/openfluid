@@ -46,7 +46,7 @@
 #include <openfluid/dllexport.hpp>
 
 
-// TOIMPL review relevance of attributes and methods of WareSrcContainer
+// TOIMPL review relevance of attributes and methods of WareSrcContainer / #framework (2.2.x)
 
 
 namespace openfluid { namespace waresdev {

@@ -62,8 +62,8 @@
     classname& operator=(classname &&) = default;
 
 
-// TOIMPL review code to use CPPCLASS_DEFAULT_FIVE
-// TOIMPL review code to use CPPCLASS_DELETE_FIVE
+// TOIMPL review code to use CPPCLASS_DEFAULT_FIVE / #framework (2.2.x)
+// TOIMPL review code to use CPPCLASS_DELETE_FIVE / #framework (2.2.x)
 
 
 #endif /* __OPENFLUID_UTILS_CPPLANGHELPERS_HPP__ */

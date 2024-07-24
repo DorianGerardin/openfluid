@@ -99,7 +99,7 @@ bool GitImportWorker::runImports()
     if (!importElement(Pair.first, Pair.second))
     {
       OK = false;
-      break; // FIXME advanced handling of failing imports
+      break; // FIXME advanced handling of failing imports #framework (2.2.x)
     }
 
     m_Progress += m_ProgressRatio;

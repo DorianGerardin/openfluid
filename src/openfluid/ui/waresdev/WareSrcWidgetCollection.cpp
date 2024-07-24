@@ -1542,7 +1542,7 @@ void WareSrcWidgetCollection::closeEditorsInFolderFromWare(const QString& WarePa
                                                            const bool Confirm)
 {
   // Can not deduce safely ware path when not based on an explicit file (true here but not in waresrcexplorer)
-  // FIXME investigate why context not deducted here
+  // FIXME investigate why context not deducted here #devstudio (2.2.x)
 
   QMap<QString, WareSrcWidget*>::iterator it = m_WareSrcWidgetByPath.find(WarePath);
   if (it != m_WareSrcWidgetByPath.end())
@@ -1571,7 +1571,8 @@ void WareSrcWidgetCollection::updateEditorsSettings()
 // =====================================================================
 
 
-void WareSrcWidgetCollection::onWareChange(const QString& /*WarePath*/) //FIXME: why WarePath ignored here?
+void WareSrcWidgetCollection::onWareChange(const QString& /*WarePath*/) //FIXME: why WarePath ignored here? 
+                                                                        // #devstudio (2.2.0)
 {
   openfluid::ui::waresdev::WareSrcFiletypeManager::instance()->updateStyles();
   for (WareSrcWidget* Ware : m_WareSrcWidgetByPath.values())

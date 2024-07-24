@@ -57,7 +57,7 @@ class TasksBase
 
     const std::vector<std::string> m_ThirdPartyArgs;
 
-    // TOIMPL should be removed once all tasks are implemented
+    // TOIMPL should be removed once all tasks are implemented / #framework (2.2.0)
     static int notImplemented()
     {
       openfluid::tools::Console::setColor(openfluid::tools::Console::Colors::BLUE);

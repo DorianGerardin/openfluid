@@ -121,7 +121,7 @@ void OPENFLUID_API microsleep(const unsigned long USec);
   @return the formatted date-time
 */
 std::string OPENFLUID_API getNowAsString(const std::string& Format); // TOIMPL to replace by DateTime::now()
-
+                                                                     // #framework (2.2.x)
 
 /**
   Generates a pseudo-unique identifier using alphanumeric characters and Mersenne Twister random engine.

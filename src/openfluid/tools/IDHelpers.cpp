@@ -110,7 +110,7 @@ bool isValidVariableName(const openfluid::core::VariableName_t& Name)
 // =====================================================================
 
 
-std::string getVariableSelectionRegExp() //FIXME Constant function: better way to write it?
+std::string getVariableSelectionRegExp() //FIXME Constant function: better way to write it? #framework (2.2.x)
 {
   std::string TripletPattern = "[^#;:]*#[0-9*-]+:";
   TripletPattern += VariableNameRuleString;

@@ -47,7 +47,7 @@
 #include <openfluid/tools/FilesystemPath.hpp>
 
 
-// TOIMPL add unit tests
+// TOIMPL add unit tests / #test (2.2.0)
 
 
 namespace openfluid { namespace base {

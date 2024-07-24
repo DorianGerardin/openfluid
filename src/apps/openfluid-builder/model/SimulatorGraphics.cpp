@@ -126,7 +126,7 @@ void SimulatorGraphics::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* /*Event*
   }
 #endif
 
-  // FIXME The line below causes the application to crash
+  // FIXME The line below causes the application to crash #builder (2.2.x)
   //QGraphicsItem::mousePressEvent(Event);
 }
 

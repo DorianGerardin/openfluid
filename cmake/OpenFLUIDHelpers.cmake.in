@@ -57,7 +57,7 @@ ENDFUNCTION()
 ###########################################################################
 
 
-# TOIMPL create OPENFLUID_DETECT_CXXSTD which calls the current macro below
+# TOIMPL create OPENFLUID_DETECT_CXXSTD which calls the current macro below / #framework (2.2.x)
 
 MACRO(OPENFLUID_DETECT_CXX17)
   SET(CMAKE_CXX_STANDARD @OFBUILD_CXX_STANDARD@)
@@ -335,7 +335,7 @@ FUNCTION(_OPENFLUID_WAREPLUGIN_BUILD)
 
   ADD_LIBRARY(${_WARE_TARGET} MODULE ${_ALL_SRC_FILES})
   IF(MINGW)
-    # TOIMPL check if still necessary
+    # TOIMPL check if still necessary / #framework (2.2.x)
     # workaround for CMake bug with MinGW
     SET_TARGET_PROPERTIES(${_WARE_TARGET} PROPERTIES LINK_FLAGS "-shared")
   ENDIF()
@@ -540,7 +540,7 @@ ENDFUNCTION()
 ###########################################################################
 
 
-# TOIMPL write doc (parameters, context variables if any, ...))
+# TOIMPL write doc (parameters, context variables if any, ...)) / #documentation (2.2.0)
 # WARE_DEFINITIONS : definitions to add at compile time
 # WARE_INCLUDE_DIRS : directories to include headers
 # WARE_LIBRARY_DIRS : directories for linking extra libraries
@@ -555,10 +555,10 @@ FUNCTION(OPENFLUID_ADD_WAREPLUGIN)
   SET(_ARGS_MULTIVAL "CPP_FILES;FORTRAN_FILES;UI_FILES;RC_FILES;OPENFLUID_COMPONENTS;I18N_LANGS;PARAMSUI_CPP_FILES;PARAMSUI_UI_FILES;PARAMSUI_RC_FILES;PARAMSUI_I18N_LANGS;PARAMSUI_OPENFLUID_COMPONENTS")
   CMAKE_PARSE_ARGUMENTS(_BUILDARGS "${_ARGS_OPTIONS}" "${_ARGS_ONEVAL}" "${_ARGS_MULTIVAL}" ${ARGN})
 
-  # TOIMPL externalize the FIND_PACKAGE(OpenFLUID) calls
-  # TOIMPL manage PARAMSUI_OPENFLUID_COMPONENTS
-  # TOIMPL manage I18N_FILES_EXTRASCANS, maybe change name of variable
-  # TOIMPL check management of I18N_LANGS
+  # TOIMPL externalize the FIND_PACKAGE(OpenFLUID) calls / #framework (2.2.x)
+  # TOIMPL manage PARAMSUI_OPENFLUID_COMPONENTS / #framework (2.2.x)
+  # TOIMPL manage I18N_FILES_EXTRASCANS, maybe change name of variable / #framework (2.2.x)
+  # TOIMPL check management of I18N_LANGS / #framework (2.2.x)
 
   _OPENFLUID_WAREPLUGIN_BUILD()
 
@@ -576,7 +576,7 @@ FUNCTION(OPENFLUID_ADD_WAREPLUGIN)
       SET(_BUILDARGS_OPENFLUID_COMPONENTS ${_BUILDARGS_PARAMSUI_OPENFLUID_COMPONENTS})
       SET(_BUILDARGS_I18N_LANGS ${_BUILDARGS_PARAMSUI_I18N_LANGS})
 
-      SET(_FORCE_PARAMSUI TRUE) # HACK see if better way to manage build of parameterization UI
+      SET(_FORCE_PARAMSUI TRUE) # HACK see if better way to manage build of parameterization UI #framework (2.2.x)
 
       _OPENFLUID_WAREPLUGIN_BUILD()
     ENDIF()
@@ -587,7 +587,7 @@ ENDFUNCTION()
 ###########################################################################
 
 
-# TOIMPL write doc
+# TOIMPL write doc / #documentation (2.2.0)
 FUNCTION(OPENFLUID_ADD_WARETESTS)
   SET(_ARGS_OPTIONS "DISCOVER")
   SET(_ARGS_ONEVAL)

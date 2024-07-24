@@ -141,7 +141,7 @@ openfluid::ware::WareID_t SimulatorRegistry::addGenerator(const GeneratorSpecs& 
     return Signature->ID;
   }
 
-  //TOIMPL add warning here that a ware without ID have been created
+  //TOIMPL add warning here that a ware without ID have been created / #framework (2.2.0)
 
   return openfluid::ware::WareID_t();
 }

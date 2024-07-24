@@ -65,6 +65,7 @@ BOOST_AUTO_TEST_CASE(test_constructor)
   Reg->discoverWares();
 
   // BOOST_CHECK_EQUAL(Reg->availableWares().size(),11); // HACK to enable again once examples build is refactored
+                                                         // #framework (2.2.0)
   
   for (const auto& C : Reg->availableWares())
   {
@@ -103,6 +104,7 @@ BOOST_AUTO_TEST_CASE(test_ghostsimulators)
   Reg->discoverWares();
 
   // BOOST_CHECK_EQUAL(Reg->availableWares().size(),16); // HACK to enable again once examples build is refactored
+                                                         // #framework (2.2.0)
 
   BOOST_CHECK(Reg->wareContainer("simA").isValid());
   BOOST_CHECK(Reg->wareContainer("simA").isGhost());

@@ -329,7 +329,7 @@ void WareSrcContainer::setConfigMode(ConfigMode Mode)
       break;
   }
 
- // TOIMPL use CMakeProxy.getBuildDir() instead
+ // TOIMPL use CMakeProxy.getBuildDir() instead / #framework (2.2.0)
   m_BuildDirPath = openfluid::tools::Filesystem::joinPath({m_AbsolutePath,"_build"+ConfigTag+"-"+m_OFVersion});
 }
 

@@ -52,7 +52,7 @@
 namespace openfluid { namespace waresdev {
 
 
-// TOIMPL reuse this wherever possible 
+// TOIMPL reuse this wherever possible / #framework (2.2.x)
 inline static const std::vector<std::string> CppFilesExt = {"cpp","hpp","cc","hh","cxx","hxx","C","H","h"};
 
 

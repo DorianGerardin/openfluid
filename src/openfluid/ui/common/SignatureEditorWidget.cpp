@@ -817,7 +817,7 @@ void SignatureEditorWidget::updateSignatureFromCommonsUI(openfluid::ware::WareSi
   }  
 
   Signature.Tags = openfluid::tools::split(ui->TagsEdit->text().toStdString(), ';');  // TOIMPL make split char generic
-  
+                                                                                      // #framework (2.2.0)
   Signature.Issues = mp_IssuesManager->getIssues();
 }
 

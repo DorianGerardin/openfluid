@@ -1013,7 +1013,7 @@ class FluidXWriterImplementation
             }
             openfluid::core::Value::Type VarType = GenDesc->getVariableType();
             
-            //FIXME disambiguate difference between implicit DOUBLE type and NONE type
+            //FIXME disambiguate difference between implicit DOUBLE type and NONE type #framework (2.2.x)
             if (VarType != openfluid::core::Value::DOUBLE && VarType != openfluid::core::Value::NONE)
             {
               GenElt->SetAttribute("vartype",openfluid::core::Value::getStringFromValueType(VarType).c_str());

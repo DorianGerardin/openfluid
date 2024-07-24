@@ -114,13 +114,13 @@ WareSrcChecker::WareSrcChecker(const std::string& SrcPath, const ChecksList& Ign
 void WareSrcChecker::updateWithPedanticCheck(ReportingData& /*RepData*/) const
 {
   // [w] non-empty description of ware
-  // TOIMPL to do
+  // TOIMPL to do / #feature (2.2.0)
 
   // [w] non-empty description of parameters/attributes/variables
-  // TOIMPL to do
+  // TOIMPL to do / #feature (2.2.0)
 
   // [w] non-empty SIUnit of parameters/attributes/variables
-  // TOIMPL to do
+  // TOIMPL to do / #feature (2.2.0)
 }
 
 
@@ -193,25 +193,25 @@ WareSrcChecker::ReportingData::ReportingList WareSrcChecker::performMetainfoChec
     if (MetaIsReadable)
     {
       // [e] metadata file contains correct ware type
-      // TOIMPL to do
+      // TOIMPL to do / #feature (2.2.0)
 
       // [e] metadata file contains ID
-      // TOIMPL to do
+      // TOIMPL to do / #feature (2.2.0)
 
       // [w] name of containing directory matches ID
-      // TOIMPL to do
+      // TOIMPL to do / #feature (2.2.0)
 
       // [w] metadata file contains non-empty name
-      // TOIMPL to do
+      // TOIMPL to do / #feature (2.2.0)
 
       // [w] metadata file contains at least one author
-      // TOIMPL to do
+      // TOIMPL to do / #feature (2.2.0)
 
       // [w] metadata file contains at least one contact
-      // TOIMPL to do
+      // TOIMPL to do / #feature (2.2.0)
       
       // [w] metadata file contains non-empty license
-      // TOIMPL to do
+      // TOIMPL to do / #feature (2.2.0)
       }
     }
 
@@ -250,7 +250,7 @@ WareSrcChecker::ReportingData::ReportingList WareSrcChecker::performCodeCheck(bo
     processReportingItem(Data,"migration_isclean_no_comments",FindMigrationTagInFile);
 
     // [w] sim2doc tag in C++ files
-    // TOIMPL to do
+    // TOIMPL to do / #feature (2.2.0)
   }
 
   return Data;

@@ -780,7 +780,7 @@ void WareSrcWidget::saveCurrentEditor()
     ui->tabWidget->setCurrentIndex(m_TabIndexByName["Board"]);
     
     onWareChange();
-  // TOIMPL emit wareChanged for other ware changes through watcher
+  // TOIMPL emit wareChanged for other ware changes through watcher / #devstudio (2.2.x)
   }
 }
 

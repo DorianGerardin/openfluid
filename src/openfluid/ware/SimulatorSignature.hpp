@@ -50,11 +50,11 @@
 namespace openfluid { namespace ware {
 
 
-typedef std::string SimMethod_t; // TOIMPL to remove, replaced by tags
+typedef std::string SimMethod_t; // TOIMPL to remove, replaced by tags / #framework (2.2.0)
 
-typedef std::string SimProcess_t; // TOIMPL to remove, replaced by tags
+typedef std::string SimProcess_t; // TOIMPL to remove, replaced by tags / #framework (2.2.0)
 
-typedef std::string SimDomain_t; // TOIMPL to remove, replaced by tags
+typedef std::string SimDomain_t; // TOIMPL to remove, replaced by tags / #framework (2.2.0)
 
 
 // =====================================================================
@@ -136,17 +136,18 @@ class OPENFLUID_API SignatureHandledData
 
     std::vector<SignatureSpatialDataItem> UsedVars;
 
-    std::vector<SignatureSpatialDataItem> ProducedAttribute; // TOIMPL add plural
+    std::vector<SignatureSpatialDataItem> ProducedAttribute; // TOIMPL add plural / #feature (2.2.x)
 
-    std::vector<SignatureSpatialDataItem> RequiredAttribute; // TOIMPL add plural
+    std::vector<SignatureSpatialDataItem> RequiredAttribute; // TOIMPL add plural / #feature (2.2.x)
 
-    std::vector<SignatureSpatialDataItem> UsedAttribute; // TOIMPL add plural
+    std::vector<SignatureSpatialDataItem> UsedAttribute; // TOIMPL add plural / #feature (2.2.x)
 
-    std::vector<std::string> RequiredExtraFiles; // TOIMPL add description associated with each file?
+    std::vector<std::string> RequiredExtraFiles; // TOIMPL add description associated with each file? / #feature (2.2.x)
 
-    std::vector<std::string> UsedExtraFiles; // TOIMPL add description associated with each file?
+    std::vector<std::string> UsedExtraFiles; // TOIMPL add description associated with each file? / #feature (2.2.x)
 
     std::vector<openfluid::core::UnitsClass_t> UsedEventsOnUnits; // TOIMPL add description to units class events?
+                                                                  // #feature (2.2.x)
 
 
     SignatureHandledData()
@@ -209,7 +210,7 @@ class OPENFLUID_API SignatureUnitsGraph
 
     std::string UpdatedUnitsGraph;
 
-    std::vector<SignatureUnitsClassItem> UpdatedUnitsClass; // TOIMPL add plural
+    std::vector<SignatureUnitsClassItem> UpdatedUnitsClass; // TOIMPL add plural / #feature (2.2.x)
 
 
     SignatureUnitsGraph()
@@ -334,17 +335,17 @@ class OPENFLUID_API SimulatorSignature : public WareSignature
     /**
       Plugin domain (i.e. hydrology, pop, erosion, ...)
     */
-    SimDomain_t Domain; // TOIMPL to remove, replaced by tags
+    SimDomain_t Domain; // TOIMPL to remove, replaced by tags / #framework (2.2.0)
 
     /**
       Plugin simulated process (i.e. surface rainfall-runoff production, ditch infiltration, ...)
     */
-    SimProcess_t Process; // TOIMPL to remove, replaced by tags
+    SimProcess_t Process; // TOIMPL to remove, replaced by tags / #framework (2.2.0)
 
     /**
       Plugin involved method (i.e. morel-seytoux, hayami, ...)
     */
-    SimMethod_t Method; // TOIMPL to remove, replaced by tags
+    SimMethod_t Method; // TOIMPL to remove, replaced by tags / #framework (2.2.0)
 
     /**
       Handled data
@@ -372,9 +373,9 @@ class OPENFLUID_API SimulatorSignature : public WareSignature
     void clear()
     {
       WareSignature::clear();
-      Domain.clear(); // TOIMPL to remove
-      Process.clear(); // TOIMPL to remove
-      Method.clear(); // TOIMPL to remove
+      Domain.clear(); // TOIMPL to remove / #framework (2.2.x)
+      Process.clear(); // TOIMPL to remove / #framework (2.2.x)
+      Method.clear(); // TOIMPL to remove / #framework (2.2.x)
       HandledData.clear();
       HandledUnitsGraph.clear();
       TimeScheduling.setAsUndefined();

@@ -210,6 +210,7 @@ BOOST_AUTO_TEST_CASE(check_consistency_Manhattan)
 
 
 // BOOST_AUTO_TEST_CASE(check_consistency_Primitives) // TOIMPL enable when random generator seedable
+                                                      // #framework (2.2.x)
 // {
 //   const openfluid::tools::Path INPath = openfluid::tools::Path(
 //     {openfluid::config::EXAMPLES_PROJECTS_SOURCE_PATH, "Primitives", "IN"});

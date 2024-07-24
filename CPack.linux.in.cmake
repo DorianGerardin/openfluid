@@ -5,7 +5,7 @@ SET(OFPACK_DEPEND_DEB "libboost${Boost_MAJOR_VERSION}.${Boost_MINOR_VERSION}-dev
                        g++, cmake (>= 3.1), 
                        gnuplot (>= 4.2), p7zip-full, graphviz, git, pandoc")
 SET(OFPACK_DEPEND_RPM_FEDORA "make, gcc-c++, gcc-gfortran, cmake, boost-devel >= 1.54, gdal-devel, libcurl, p7zip,
-                              gnuplot, graphviz, doxygen, git, pandoc, texlive-scheme-full")  # FIXME texlive-scheme-full too heavy, find underlying necessary packages (pdflatex...)
+                              gnuplot, graphviz, doxygen, git, pandoc, texlive-scheme-full")  # FIXME texlive-scheme-full too heavy, find underlying necessary packages (pdflatex...) #package (2.2.x)
 SET(OFPACK_DEPEND_RPM_CENTOS "gcc-c++, boost-devel >= 1.40, gdal-devel, libcurl, git, pandoc")
 
 IF(OFBUILD_ENABLE_GUI)
