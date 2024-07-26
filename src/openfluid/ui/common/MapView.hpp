@@ -37,12 +37,14 @@
  */
 
 
-#ifndef __OPENFLUID_BUILDERAPP_MAPVIEW_HPP__
-#define __OPENFLUID_BUILDERAPP_MAPVIEW_HPP__
+#ifndef __OPENFLUID_UICOMMON_MAPVIEW_HPP__
+#define __OPENFLUID_UICOMMON_MAPVIEW_HPP__
+
+
+#include <QGraphicsView>
 
 #include <openfluid/dllexport.hpp>
 
-#include <QGraphicsView>
 
 namespace openfluid { namespace ui { namespace common {
 
@@ -84,4 +86,4 @@ class OPENFLUID_API MapView : public QGraphicsView
 
 } } }
 
-#endif /* __OPENFLUID_BUILDERAPP_MAPVIEW_HPP__ */
+#endif /* __OPENFLUID_UICOMMON_MAPVIEW_HPP__ */

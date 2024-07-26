@@ -37,18 +37,19 @@
  */
 
 
-#ifndef __OPENFLUID_BUILDERAPP_MAPSCENE_HPP__
-#define __OPENFLUID_BUILDERAPP_MAPSCENE_HPP__
+#ifndef __OPENFLUID_UICOMMON_MAPSCENE_HPP__
+#define __OPENFLUID_UICOMMON_MAPSCENE_HPP__
 
-#include <openfluid/dllexport.hpp>
 
 #include <QGraphicsScene>
 
+#include <openfluid/dllexport.hpp>
 #include <openfluid/fluidx/DatastoreItemDescriptor.hpp>
 #include <openfluid/fluidx/SpatialDomainDescriptor.hpp>
 #include <openfluid/core/Datastore.hpp>
 
 #include "MapItemGraphics.hpp"
+
 
 namespace openfluid { namespace ui { namespace common {
 
@@ -98,4 +99,4 @@ class OPENFLUID_API MapScene : public QGraphicsScene
 
 } } }
 
-#endif /* __OPENFLUID_BUILDERAPP_MAPSCENE_HPP__ */
+#endif /* __OPENFLUID_UICOMMON_MAPSCENE_HPP__ */

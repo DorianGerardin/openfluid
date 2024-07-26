@@ -31,34 +31,41 @@
 
 
 /**
-  @file MapItemGraphics.cpp
+  @file MultiPolygonGraphics.cpp
 
   @author Jean-Christophe FABRE <jean-christophe.fabre@inra.fr>
 */
 
 
-#include <QStyleOptionGraphicsItem>
+#include <QBrush>
 
-#include "MapItemGraphics.hpp"
+#include "MultiPolygonGraphics.hpp"
 
 
-QColor openfluid::ui::common::MapItemGraphics::m_SelectionColor = QColor("#FFC85F");
-
-openfluid::ui::common::MapItemGraphics::MapItemGraphics(const QColor& MainColor):
-  QGraphicsPathItem(), m_UnitID(0), m_MainColor(MainColor)
+openfluid::ui::common::MultiPolygonGraphics::MultiPolygonGraphics(OGRMultiPolygon* OGRMultiPoly, const QPen& Pen, 
+                                                                  const QBrush& Brush):
+  SurfacicGraphics(Brush.color())
 {
+  QPainterPath Path;
 
+  for (int i=0; i<OGRMultiPoly->getNumGeometries();i++)
+  {
+
+    OGRLinearRing* LinearRing = dynamic_cast<OGRPolygon*>(OGRMultiPoly->getGeometryRef(i))->getExteriorRing();
+
+    QPolygonF Poly;
+
+    for (int i=0; i < LinearRing->getNumPoints(); i++)
+    {
+      Poly << QPointF(LinearRing->getX(i),LinearRing->getY(i));
+    }
+
+    Path.addPolygon(Poly);
+  }
+
+  setPen(Pen);
+  setBrush(Brush);
+
+  setPath(Path);
 }
 
-
-// =====================================================================
-// =====================================================================
-
-
-void openfluid::ui::common::MapItemGraphics::paint(QPainter *Painter, const QStyleOptionGraphicsItem *Option, 
-                                                   QWidget *Widget)
-{
-    QStyleOptionGraphicsItem CustomOption(*Option);
-    CustomOption.state &= ~QStyle::State_Selected;
-    QGraphicsPathItem::paint(Painter, &CustomOption, Widget);
-}

@@ -37,8 +37,8 @@
 */
 
 
-#ifndef __OPENFLUID_BUILDERAPP_MAPITEMGRAPHICS_HPP__
-#define __OPENFLUID_BUILDERAPP_MAPITEMGRAPHICS_HPP__
+#ifndef __OPENFLUID_UICOMMON_MAPITEMGRAPHICS_HPP__
+#define __OPENFLUID_UICOMMON_MAPITEMGRAPHICS_HPP__
 
 
 #include <QGraphicsPathItem>
@@ -47,7 +47,9 @@
 #include <openfluid/core/TypeDefs.hpp>
 
 
-class MapItemGraphics : public QGraphicsPathItem
+namespace openfluid { namespace ui { namespace common {
+
+class OPENFLUID_API MapItemGraphics : public QGraphicsPathItem
 {
   protected:
 
@@ -69,5 +71,6 @@ class MapItemGraphics : public QGraphicsPathItem
 
 };
 
+} } }
 
-#endif /* __OPENFLUID_BUILDERAPP_MAPITEMGRAPHICS_HPP__ */
+#endif /* __OPENFLUID_UICOMMON_MAPITEMGRAPHICS_HPP__ */

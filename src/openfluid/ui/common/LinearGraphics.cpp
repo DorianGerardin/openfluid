@@ -31,34 +31,33 @@
 
 
 /**
-  @file MapItemGraphics.cpp
+  @file LinearGraphics.cpp
 
   @author Jean-Christophe FABRE <jean-christophe.fabre@inra.fr>
-*/
+ */
 
 
-#include <QStyleOptionGraphicsItem>
+#include <QPen>
 
-#include "MapItemGraphics.hpp"
+#include "LinearGraphics.hpp"
 
 
-QColor openfluid::ui::common::MapItemGraphics::m_SelectionColor = QColor("#FFC85F");
-
-openfluid::ui::common::MapItemGraphics::MapItemGraphics(const QColor& MainColor):
-  QGraphicsPathItem(), m_UnitID(0), m_MainColor(MainColor)
+QVariant openfluid::ui::common::LinearGraphics::itemChange(GraphicsItemChange Change, const QVariant& Value)
 {
+  if (Change == QGraphicsItem::ItemSelectedHasChanged)
+  {
+    QPen CurrentPen = pen();
 
-}
+    if (isSelected())
+    {
+      CurrentPen.setColor(m_SelectionColor);
+    }
+    else
+    {
+      CurrentPen.setColor(m_MainColor);
+    }
 
-
-// =====================================================================
-// =====================================================================
-
-
-void openfluid::ui::common::MapItemGraphics::paint(QPainter *Painter, const QStyleOptionGraphicsItem *Option, 
-                                                   QWidget *Widget)
-{
-    QStyleOptionGraphicsItem CustomOption(*Option);
-    CustomOption.state &= ~QStyle::State_Selected;
-    QGraphicsPathItem::paint(Painter, &CustomOption, Widget);
+    setPen(CurrentPen);
+  }
+  return openfluid::ui::common::MapItemGraphics::itemChange(Change, Value);
 }

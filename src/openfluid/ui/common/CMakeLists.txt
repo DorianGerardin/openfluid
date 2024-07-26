@@ -18,7 +18,10 @@ SET(OPENFLUID_UI_COMMON_CPP AppMainWindow.cpp OpenFLUIDDialog.cpp
                             PreferencesDialog.cpp DetectQtDevToolsDialog.cpp
                             TimePeriodWidget.cpp
                             WareIssuesManagerWidget.cpp  WareshubIssueDialog.cpp
-                            MapScene.cpp MapView.cpp MapItemGraphics.cpp
+                            MapScene.cpp MapView.cpp MapItemGraphics.cpp 
+                            PointGraphics.cpp PunctualGraphics.cpp MultiPointGraphics.cpp
+                            LineStringGraphics.cpp LinearGraphics.cpp MultiLineStringGraphics.cpp
+                            PolygonGraphics.cpp SurfacicGraphics.cpp MultiPolygonGraphics.cpp
                             )
 
 SET(OPENFLUID_UI_COMMON_HPP AppMainWindow.hpp OpenFLUIDDialog.hpp 
@@ -42,6 +45,9 @@ SET(OPENFLUID_UI_COMMON_HPP AppMainWindow.hpp OpenFLUIDDialog.hpp
                             UIHelpers.hpp
                             WareIssuesManagerWidget.hpp  WareshubIssueDialog.hpp
                             MapScene.hpp MapView.hpp MapItemGraphics.hpp
+                            PointGraphics.hpp PunctualGraphics.hpp MultiPointGraphics.hpp
+                            LineStringGraphics.hpp LinearGraphics.hpp MultiLineStringGraphics.hpp
+                            PolygonGraphics.hpp SurfacicGraphics.hpp MultiPolygonGraphics.hpp
                             )
 
 

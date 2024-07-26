@@ -29,36 +29,32 @@
   
 */
 
-
 /**
-  @file MapItemGraphics.cpp
+  @file MultiPointGraphics.hpp
 
   @author Jean-Christophe FABRE <jean-christophe.fabre@inra.fr>
 */
 
 
-#include <QStyleOptionGraphicsItem>
+#ifndef __OPENFLUID_UICOMMON_MULTIPOINTGRAPHICS_HPP__
+#define __OPENFLUID_UICOMMON_MULTIPOINTGRAPHICS_HPP__
 
-#include "MapItemGraphics.hpp"
+
+#include <QPen>
+
+#include "PunctualGraphics.hpp"
 
 
-QColor openfluid::ui::common::MapItemGraphics::m_SelectionColor = QColor("#FFC85F");
+namespace openfluid { namespace ui { namespace common {
 
-openfluid::ui::common::MapItemGraphics::MapItemGraphics(const QColor& MainColor):
-  QGraphicsPathItem(), m_UnitID(0), m_MainColor(MainColor)
+class OPENFLUID_API MultiPointGraphics : public PunctualGraphics
 {
+  public:
 
-}
+    MultiPointGraphics(OGRMultiPoint* OGRMultiPt, const QPen& Pen);
 
+};
 
-// =====================================================================
-// =====================================================================
+} } }
 
-
-void openfluid::ui::common::MapItemGraphics::paint(QPainter *Painter, const QStyleOptionGraphicsItem *Option, 
-                                                   QWidget *Widget)
-{
-    QStyleOptionGraphicsItem CustomOption(*Option);
-    CustomOption.state &= ~QStyle::State_Selected;
-    QGraphicsPathItem::paint(Painter, &CustomOption, Widget);
-}
+#endif /* __OPENFLUID_UICOMMON_MULTIPOINTGRAPHICS_HPP__ */

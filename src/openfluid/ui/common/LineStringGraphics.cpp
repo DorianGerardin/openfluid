@@ -31,34 +31,31 @@
 
 
 /**
-  @file MapItemGraphics.cpp
+  @file LineStringGraphics.cpp
 
   @author Jean-Christophe FABRE <jean-christophe.fabre@inra.fr>
 */
 
 
-#include <QStyleOptionGraphicsItem>
+#include <QPen>
 
-#include "MapItemGraphics.hpp"
+#include "LineStringGraphics.hpp"
 
 
-QColor openfluid::ui::common::MapItemGraphics::m_SelectionColor = QColor("#FFC85F");
-
-openfluid::ui::common::MapItemGraphics::MapItemGraphics(const QColor& MainColor):
-  QGraphicsPathItem(), m_UnitID(0), m_MainColor(MainColor)
+openfluid::ui::common::LineStringGraphics::LineStringGraphics(OGRLineString* OGRLine, const QPen& Pen):
+  LinearGraphics(Pen.color())
 {
+  QPainterPath Path;
 
+  setPen(Pen);
+
+  Path.moveTo(OGRLine->getX(0),OGRLine->getY(0));
+
+  for (int i=1; i < OGRLine->getNumPoints(); i++)
+  {
+    Path.lineTo(OGRLine->getX(i),OGRLine->getY(i));
+  }
+
+  setPath(Path);
 }
 
-
-// =====================================================================
-// =====================================================================
-
-
-void openfluid::ui::common::MapItemGraphics::paint(QPainter *Painter, const QStyleOptionGraphicsItem *Option, 
-                                                   QWidget *Widget)
-{
-    QStyleOptionGraphicsItem CustomOption(*Option);
-    CustomOption.state &= ~QStyle::State_Selected;
-    QGraphicsPathItem::paint(Painter, &CustomOption, Widget);
-}

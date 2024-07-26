@@ -31,23 +31,29 @@
 
 
 /**
-  @file MapItemGraphics.cpp
+  @file PunctualGraphics.cpp
 
   @author Jean-Christophe FABRE <jean-christophe.fabre@inra.fr>
 */
 
 
-#include <QStyleOptionGraphicsItem>
+#include <QPen>
+#include <QBrush>
 
-#include "MapItemGraphics.hpp"
+#include "PunctualGraphics.hpp"
 
 
-QColor openfluid::ui::common::MapItemGraphics::m_SelectionColor = QColor("#FFC85F");
+constexpr unsigned int POINT_OFFSET = 3;
 
-openfluid::ui::common::MapItemGraphics::MapItemGraphics(const QColor& MainColor):
-  QGraphicsPathItem(), m_UnitID(0), m_MainColor(MainColor)
+
+void openfluid::ui::common::PunctualGraphics::drawPoint(QPainterPath& Path, const OGRPoint* OGRPt)
 {
-
+  // TODO to be replaced by a real dot (ellipse)
+  //  draw a cross
+  Path.moveTo(OGRPt->getX()-POINT_OFFSET,OGRPt->getY());
+  Path.lineTo(OGRPt->getX()+POINT_OFFSET,OGRPt->getY());
+  Path.moveTo(OGRPt->getX(),OGRPt->getY()-POINT_OFFSET);
+  Path.lineTo(OGRPt->getX(),OGRPt->getY()+POINT_OFFSET);
 }
 
 
@@ -55,10 +61,23 @@ openfluid::ui::common::MapItemGraphics::MapItemGraphics(const QColor& MainColor)
 // =====================================================================
 
 
-void openfluid::ui::common::MapItemGraphics::paint(QPainter *Painter, const QStyleOptionGraphicsItem *Option, 
-                                                   QWidget *Widget)
+QVariant openfluid::ui::common::PunctualGraphics::itemChange(GraphicsItemChange Change, const QVariant& Value)
 {
-    QStyleOptionGraphicsItem CustomOption(*Option);
-    CustomOption.state &= ~QStyle::State_Selected;
-    QGraphicsPathItem::paint(Painter, &CustomOption, Widget);
+  if (Change == QGraphicsItem::ItemSelectedHasChanged)
+  {
+    QPen CurrentPen = pen();
+
+    if (isSelected())
+    {
+      CurrentPen.setColor(m_SelectionColor);
+    }
+    else
+    {
+      CurrentPen.setColor(m_MainColor);
+    }
+
+    setPen(CurrentPen);
+  }
+  return MapItemGraphics::itemChange(Change, Value);
 }
+

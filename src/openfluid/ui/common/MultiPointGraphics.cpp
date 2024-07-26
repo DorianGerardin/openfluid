@@ -31,34 +31,27 @@
 
 
 /**
-  @file MapItemGraphics.cpp
+  @file MultiPointGraphics.cpp
 
   @author Jean-Christophe FABRE <jean-christophe.fabre@inra.fr>
-*/
+ */
 
 
-#include <QStyleOptionGraphicsItem>
-
-#include "MapItemGraphics.hpp"
+#include "MultiPointGraphics.hpp"
 
 
-QColor openfluid::ui::common::MapItemGraphics::m_SelectionColor = QColor("#FFC85F");
-
-openfluid::ui::common::MapItemGraphics::MapItemGraphics(const QColor& MainColor):
-  QGraphicsPathItem(), m_UnitID(0), m_MainColor(MainColor)
+openfluid::ui::common::MultiPointGraphics::MultiPointGraphics(OGRMultiPoint* OGRMultiPt, const QPen& Pen):
+  PunctualGraphics(Pen.color())
 {
+  QPainterPath Path;
 
-}
+  setPen(Pen);
 
+  for (int i=0; i<OGRMultiPt->getNumGeometries();i++)
+  {
+    OGRPoint* OGRPt = dynamic_cast<OGRPoint*>(OGRMultiPt->getGeometryRef(i));
+    drawPoint(Path,OGRPt);
+  }
 
-// =====================================================================
-// =====================================================================
-
-
-void openfluid::ui::common::MapItemGraphics::paint(QPainter *Painter, const QStyleOptionGraphicsItem *Option, 
-                                                   QWidget *Widget)
-{
-    QStyleOptionGraphicsItem CustomOption(*Option);
-    CustomOption.state &= ~QStyle::State_Selected;
-    QGraphicsPathItem::paint(Painter, &CustomOption, Widget);
+  setPath(Path);
 }
