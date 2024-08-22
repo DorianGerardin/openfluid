@@ -218,7 +218,8 @@ QToolButton {
   connect(mp_MessagesWidget, SIGNAL(messageClicked(WareSrcMsgParser::WareSrcMsg&)),
           this, SLOT(onMessageClicked(WareSrcMsgParser::WareSrcMsg&)));
 
-
+  enableSignatureEdition(openfluid::tools::FilesystemPath(Info.AbsoluteWarePath)
+                                                          .isFile(openfluid::config::WARESDEV_WAREMETA_FILE));
 }
 
 
@@ -1102,6 +1103,16 @@ void WareSrcWidget::updateEditorsSettings()
   {
     Editor->updateSettings();
   }
+}
+
+
+// =====================================================================
+// =====================================================================
+
+
+void WareSrcWidget::enableSignatureEdition(bool Enabled)
+{
+  mp_ActionsCollection->action("EditSignature")->setEnabled(Enabled);
 }
 
 
