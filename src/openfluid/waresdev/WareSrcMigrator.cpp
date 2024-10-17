@@ -226,14 +226,17 @@ std::vector<std::string> mergeWareshubInSignatureFile(const openfluid::tools::Pa
           const openfluid::thirdparty::json& Issues = WHubDoc["issues"];
           if (Issues.is_object())
           {
+            std::set<unsigned int> CorrectIssuesIDs;
+            std::vector<openfluid::ware::WareIssue> ValidIssues;
+            std::vector<openfluid::ware::WareIssue> UnvalidIssues;
             for (const auto& [ID,Info] : Issues.items())
             {
+              std::cout << "iss: " << Info.value("title","") << std::endl;
               openfluid::ware::WareIssue Iss;
 
               std::string Title = Info.value("title","");
               if (!Title.empty())
               {
-                Iss.ID = std::stoi(ID);
                 Iss.Title = Title;
                 Iss.Description = Info.value("description","");
                 Iss.Creator = Info.value("creator","");
@@ -245,23 +248,50 @@ std::vector<std::string> mergeWareshubInSignatureFile(const openfluid::tools::Pa
                 std::string Urgency = Info.value("urgency","");
                 if (!Urgency.empty())
                 {
-                  Iss.Tags.push_back(Urgency+"-urgency");
+                  Iss.Tags.push_back("urgency::" + Urgency);
                 }
 
                 // issue type in tags
                 std::string Type = Info.value("type","");
                 if (!Type.empty())
                 {
-                  Iss.Tags.push_back(Type);
+                  Iss.Tags.push_back("type::" + Type);
                 }
-                try
+
+                // handle unvalid issues IDs
+                int IntegerID;
+                if (!openfluid::tools::toNumeric(ID, IntegerID))
                 {
-                  Signature.Issues.add(Iss); 
+                  UnvalidIssues.push_back(Iss);
                 }
-                catch (openfluid::base::Exception& E)
+                else
                 {
-                  Messages.push_back(E.what());
+                  CorrectIssuesIDs.insert(IntegerID);
+                  Iss.ID = IntegerID;
+                  ValidIssues.push_back(Iss);
                 }
+              }
+            }
+
+            // set valid IDs to unvalid issues
+            unsigned int HighestIssueID = *(--CorrectIssuesIDs.end());
+            int CurrentValidID = HighestIssueID + 1;
+            for(auto& NewValidIssue : UnvalidIssues)
+            {
+              NewValidIssue.ID = CurrentValidID;
+              ValidIssues.push_back(NewValidIssue);
+              CurrentValidID++;
+            }
+
+            for(const auto& Iss : ValidIssues)
+            {
+              try
+              {
+                Signature.Issues.add(Iss); 
+              }
+              catch (openfluid::base::Exception& E)
+              {
+                Messages.push_back(E.what());
               }
             }
           }
