@@ -83,6 +83,8 @@ bool ExamplesManager::installDirectory(const std::string& FromPath, const std::s
   {
     InstallTargetPathObj.makeDirectory();
 
+    std::cout << "[Test exemples] " << DirName << " copy directory" << std::endl;
+
     return openfluid::tools::Filesystem::copyDirectory(openfluid::tools::Filesystem::joinPath({FromPath,DirName}),
                                                        ToPath,true,true);
   }
@@ -101,15 +103,20 @@ bool ExamplesManager::installProject(const std::string& ProjectDir,
 {
   std::string FromPath = openfluid::tools::Filesystem::joinPath({buildRessourcesPath(ResourcesPath),
                                                                  openfluid::config::PROJECTS_PATH});
+  std::cout << "Test exemples " << "From Path(project) : " << FromPath << std::endl;
   if (!openfluid::tools::FilesystemPath({FromPath,ProjectDir}).isDirectory())
   {
     // silent since called for every ware import
+    std::cout << "[Test exemples] " << ProjectDir << " (project) is not a directory" << std::endl;
     return false;
   }
   std::string ToPath = openfluid::tools::Filesystem::joinPath({buildInstallPath(InstallPath),
                                                                openfluid::config::PROJECTS_PATH});
+  std::cout << "[Test exemples] " << "To Path(project) : " << ToPath << std::endl;
   std::cout << "-- Installing project " << ProjectDir << " from " << FromPath << " to " << ToPath << std::endl;
-  return installDirectory(FromPath, ToPath, ProjectDir, Force);
+  bool HasInstalledDirectory = installDirectory(FromPath, ToPath, ProjectDir, Force);
+  std::cout << "[Test exemples] " << "Installed directory(project) : " << HasInstalledDirectory << std::endl;
+  return HasInstalledDirectory;
 }
 
 
@@ -124,16 +131,21 @@ bool ExamplesManager::installSimulator(const std::string& SimulatorDir,
   std::string FromPath = openfluid::tools::Filesystem::joinPath({buildRessourcesPath(ResourcesPath),
                                                                  openfluid::config::WARESDEV_PATH,
                                                                  openfluid::config::SIMULATORS_PATH});
+  std::cout << "[Test exemples] " << "From Path(simulator) : " << FromPath << std::endl;
   if (!openfluid::tools::FilesystemPath({FromPath,SimulatorDir}).isDirectory())
   {
     // silent since called for every ware import
+    std::cout << "[Test exemples] " << SimulatorDir << " (simulator) is not a directory" << std::endl;
     return false;
   }
   std::string ToPath = openfluid::tools::Filesystem::joinPath({buildInstallPath(InstallPath),
                                                                openfluid::config::WARESDEV_PATH,
                                                                openfluid::config::SIMULATORS_PATH});
+  std::cout << "[Test exemples] " << "To Path(simulator) : " << ToPath << std::endl;
   std::cout << "-- Installing simulator " << SimulatorDir << " from " << FromPath << " to " << ToPath << std::endl;
-  return installDirectory(FromPath,ToPath,SimulatorDir,Force);
+  bool HasInstalledDirectory = installDirectory(FromPath,ToPath,SimulatorDir,Force);
+  std::cout << "[Test exemples] " << "Installed directory(simulator) : " << HasInstalledDirectory << std::endl;
+  return HasInstalledDirectory;
 }
 
 
@@ -146,12 +158,17 @@ bool ExamplesManager::installAllProjects(const std::string& ResourcesPath, const
 {
   auto ResPath = buildRessourcesPath(ResourcesPath);
   auto InstPath = buildInstallPath(InstallPath);
+  std::cout << "[Test exemples] " << "Res Path (projects) : " << ResPath << std::endl;
+  std::cout << "[Test exemples] " << "Install Path (projects) : " << InstPath << std::endl;
 
   std::string ProjectsPath = openfluid::tools::Filesystem::joinPath({ResPath,openfluid::config::PROJECTS_PATH});
+  std::cout << "[Test exemples] " << "Projects Path : " << ProjectsPath << std::endl;
 
   if (openfluid::tools::FilesystemPath(ProjectsPath).isDirectory())
   {
+    std::cout << "[Test exemples] " << "Projects Path is directory" << std::endl;
     std::vector<std::string> FoundProjects = openfluid::tools::Filesystem::findDirectories(ProjectsPath);
+    std::cout << "[Test exemples] " << "Found : " << FoundProjects.size() << " projects" << std::endl;
 
     bool AllIsOK = true;
     for (const auto& Prj : FoundProjects)
@@ -160,7 +177,7 @@ bool ExamplesManager::installAllProjects(const std::string& ResourcesPath, const
     }
     return AllIsOK;
   }
- 
+  std::cout << "[Test exemples] " << "Projects Path is not a directory" << std::endl;
   return false;
 }
 
@@ -174,14 +191,19 @@ bool ExamplesManager::installAllSimulators(const std::string& ResourcesPath, con
 {
   auto ResPath = buildRessourcesPath(ResourcesPath);
   auto InstPath = buildInstallPath(InstallPath);
+  std::cout << "[Test exemples] " << "Res Path (simulators) : " << ResPath << std::endl;
+  std::cout << "[Test exemples] " << "Install Path (simulators) : " << InstPath << std::endl;
 
   std::string SimulatorsPath = openfluid::tools::Filesystem::joinPath({ResPath,
                                                                        openfluid::config::WARESDEV_PATH,
                                                                        openfluid::config::SIMULATORS_PATH});
   
+  std::cout << "[Test exemples] " << "Simulators Path : " << SimulatorsPath << std::endl;
   if (openfluid::tools::FilesystemPath(SimulatorsPath).isDirectory())
   {
+    std::cout << "[Test exemples] " << "Simulators Path is directory" << std::endl;
     std::vector<std::string> FoundSimulators = openfluid::tools::Filesystem::findDirectories(SimulatorsPath);
+    std::cout << "[Test exemples] " << "Found : " << FoundSimulators.size() << " simulators" << std::endl;
 
     bool AllIsOK = true;
     for (const auto& Sim : FoundSimulators)
@@ -190,7 +212,7 @@ bool ExamplesManager::installAllSimulators(const std::string& ResourcesPath, con
     }
     return AllIsOK;
   }
-
+  std::cout << "[Test exemples] " << "Simulators Path is not a directory" << std::endl;
   return false;
 }
 
