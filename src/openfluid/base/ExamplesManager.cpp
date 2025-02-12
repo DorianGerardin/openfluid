@@ -103,7 +103,7 @@ bool ExamplesManager::installProject(const std::string& ProjectDir,
 {
   std::string FromPath = openfluid::tools::Filesystem::joinPath({buildRessourcesPath(ResourcesPath),
                                                                  openfluid::config::PROJECTS_PATH});
-  std::cout << "Test exemples " << "From Path(project) : " << FromPath << std::endl;
+  std::cout << "[Test exemples] " << "From Path(project) : " << FromPath << std::endl;
   if (!openfluid::tools::FilesystemPath({FromPath,ProjectDir}).isDirectory())
   {
     // silent since called for every ware import
