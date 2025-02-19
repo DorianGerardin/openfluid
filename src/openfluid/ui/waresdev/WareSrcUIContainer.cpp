@@ -213,6 +213,14 @@ void WareSrcUIContainer::configure()
                                                       getConfigureVariables(),getConfigureGenerator(),
                                                       openfluid::ui::toStdStringVector(ExtraOptionsList));
 
+  std::cout << "Configure cmd UI: " << Cmd.joined() << std::endl;
+  auto Vars = getConfigureVariables();
+  std::cout << "Configure vars: " << std::endl;
+  for(const auto& Var: Vars)
+  {
+    std::cout << "   Var UI: " << Var.first << " " << Var.second << std::endl;
+  }
+
   runCommand(Cmd, getConfigureEnvironment(), WareSrcProcess::Type::CONFIGURE);
 }
 
@@ -380,6 +388,8 @@ QProcessEnvironment WareSrcUIContainer::getConfigureEnvironment() const
       Env.insert("PATH", CustomPath);
     }
   }
+
+  std::cout << "ENV UI path: " << Env.value("PATH").toStdString() << std::endl;
 
   return Env;
 }

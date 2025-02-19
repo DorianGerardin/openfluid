@@ -39,6 +39,7 @@
 
 
 #include <memory>
+#include <cstdlib>
 
 #include <openfluid/ware/TypeDefs.hpp>
 #include <openfluid/waresdev/WareSrcFactory.hpp>
@@ -235,6 +236,9 @@ int WareTasks::processConfigure() const
   auto CMakeCmd = openfluid::utils::CMakeProxy::getConfigureCommand(BuildFSP.toGeneric(),SrcFSP.toGeneric(),
                                                                     Vars,Generator);
   CMakeCmd.Args << m_ThirdPartyArgs;
+
+  std::cout << "Configure cmd CLI: " << CMakeCmd.joined() << std::endl;
+  std::cout << "ENV CLI path: " << std::string(std::getenv("PATH")) << std::endl;
 
   return openfluid::utils::Process::system(CMakeCmd);
 }
