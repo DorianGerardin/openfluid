@@ -334,7 +334,9 @@ void GNUplotObsParamsWidget::update()
     ui->GraphsListWidget->addItem(GraphItem);
   }
 
+  std::cout << "before setCurrentRow" << std::endl;
   ui->SeriesListWidget->setCurrentRow(CurrentSeriesRow);
+  std::cout << "after setCurrentRow" << std::endl;
   ui->GraphsListWidget->setCurrentRow(CurrentGraphsRow);
 }
 
@@ -499,8 +501,13 @@ void GNUplotObsParamsWidget::renameSerie(QListWidgetItem* Item)
   {
     QString NewSerieName = Item->text();
 
+    if (NewSerieName.count(".") >= 1)
+    {
+      QMessageBox::critical(this, tr("Serie renaming"),tr("A serie name cannot contains dots."), QMessageBox::Close);
+    }
+
     // Perform renaming only if the new serie name is not already used
-    if (ui->SeriesListWidget->findItems(NewSerieName,Qt::MatchExactly).size() == 1)
+    else if (ui->SeriesListWidget->findItems(NewSerieName,Qt::MatchExactly).size() == 1)
     {
       QString CurrentSeriePrefix = "serie." + m_CurrentSerieName + ".";
       QString NewSeriePrefix = "serie." + NewSerieName + ".";
@@ -581,9 +588,12 @@ void GNUplotObsParamsWidget::editSerieName()
 
 void GNUplotObsParamsWidget::setCurrentSerie(int CurrentRow)
 {
+  //disconnect(ui->SeriesListWidget, &QListWidget::currentRowChanged, this, &GNUplotObsParamsWidget::setCurrentSerie);
+  std::cout << "setCurrentSerie" << std::endl;
   QListWidgetItem *CurrentItem = ui->SeriesListWidget->item(CurrentRow);
   if (CurrentItem)
   {
+    std::cout << "CurrentItem" << std::endl;
     ui->RemoveSerieButton->setEnabled(true);
     ui->RenameSerieButton->setEnabled(true);
 
@@ -595,9 +605,11 @@ void GNUplotObsParamsWidget::setCurrentSerie(int CurrentRow)
     if (Serie.Type == SerieInfo::SerieType::SERIE_UNKNOWN
         || Serie.Type == SerieInfo::SerieType::SERIE_VAR)
     {
+      std::cout << "SERIE_UNKNOWN | SERIE_VAR" << std::endl;
       ui->SerieVariableRadio->setChecked(true);
       ui->VariableSourceWidget->show();
       ui->DataFileSourceWidget->hide();
+      std::cout << "here 1" << std::endl;
 
       ui->VariableNameEdit->setText(QString::fromStdString(Serie.VarName));
       ui->UnitsClassComboBox->clear();
@@ -607,28 +619,38 @@ void GNUplotObsParamsWidget::setCurrentSerie(int CurrentRow)
       {
         ui->UnitsClassComboBox->addItem(ClassName);
       }
+      std::cout << "here 2" << std::endl;
 
       QString UnitsClass = QString::fromStdString(Serie.UnitsClass);
       if (ui->UnitsClassComboBox->findText(UnitsClass) != -1)
       {
         ui->UnitsClassComboBox->setCurrentText(UnitsClass);
+        std::cout << "before updateClassIDs" << std::endl;
         updateClassIDs(UnitsClass);
+        std::cout << "after updateClassIDs" << std::endl;
 
         QString UnitID = QString::number(Serie.UnitID);
         if (ui->UnitIDComboBox->findText(UnitID) != -1)
         {
+          std::cout << "before ui->UnitIDComboBox->setCurrentText" << std::endl;
           ui->UnitIDComboBox->setCurrentText(UnitID);
+          std::cout << "after ui->UnitIDComboBox->setCurrentText" << std::endl;
         }
         else
         {
           ui->UnitIDComboBox->setCurrentIndex(0);
+          std::cout << "before setUnitID" << std::endl;
           setUnitID(ui->UnitIDComboBox->currentText());
+          std::cout << "after setUnitID" << std::endl;
         }
       }
       else
       {
+        std::cout << "here 3" << std::endl;
         ui->UnitsClassComboBox->setCurrentIndex(0);
+        std::cout << "before setUnitsClass" << std::endl;
         setUnitsClass(ui->UnitsClassComboBox->currentText());
+        std::cout << "after setUnitsClass" << std::endl;
       }
     }
     else if (Serie.Type == SerieInfo::SerieType::SERIE_FILE)
@@ -640,7 +662,9 @@ void GNUplotObsParamsWidget::setCurrentSerie(int CurrentRow)
       ui->SourceFileEdit->setText(QString::fromStdString(Serie.SourceFile));
     }
 
+    std::cout << "before ui->SerieLabelEdit->setText" << std::endl;
     ui->SerieLabelEdit->setText(QString::fromStdString(Serie.Label));
+    std::cout << "after ui->SerieLabelEdit->setText" << std::endl;
 
     QString Style = QString::fromStdString(Serie.Style);
     if (!Style.isEmpty() && ui->SerieStyleComboBox->findText(Style) == -1)
@@ -648,17 +672,23 @@ void GNUplotObsParamsWidget::setCurrentSerie(int CurrentRow)
       ui->SerieStyleComboBox->addItem(Style);
     }
 
+    std::cout << "before ui->SerieStyleComboBox" << std::endl;
     ui->SerieStyleComboBox->setCurrentText(Style);
+    std::cout << "after ui->SerieStyleComboBox" << std::endl;
 
+    std::cout << "before ui->SerieInfosWidget->setCurrentIndex" << std::endl;
     ui->SerieInfosWidget->setCurrentIndex(1);
+    std::cout << "after ui->SerieInfosWidget->setCurrentIndex" << std::endl;
   }
   else
   {
+    std::cout << "NO CurrentItem" << std::endl;
     ui->SerieInfosWidget->setCurrentIndex(0);
     m_CurrentSerieName = "";
     ui->RemoveSerieButton->setEnabled(false);
     ui->RenameSerieButton->setEnabled(false);
   }
+  //connect(ui->SeriesListWidget, &QListWidget::currentRowChanged, this, &GNUplotObsParamsWidget::setCurrentSerie);
 }
 
 
@@ -723,15 +753,20 @@ void GNUplotObsParamsWidget::setUnitsClass(const QString& UnitsClass)
 {
   if (ui->SeriesListWidget->currentRow() >= 0)
   {
+    std::cout << "inside setUnitsClass" << std::endl;
     std::string SeriePrefix = "serie." + ui->SeriesListWidget->currentItem()->text().toStdString() + ".";
 
     mp_Params->erase(SeriePrefix + "unitsclass");
     mp_Params->insert({SeriePrefix + "unitsclass", UnitsClass.toStdString()});
 
+    std::cout << "before updateClassIDs" << std::endl;
     updateClassIDs(UnitsClass);
+    std::cout << "after updateClassIDs" << std::endl;
 
     ui->UnitIDComboBox->setCurrentIndex(0);
+    std::cout << "before setUnitID" << std::endl;
     setUnitID(ui->UnitIDComboBox->currentText());
+    std::cout << "after setUnitID" << std::endl;
   }
 }
 
@@ -920,6 +955,11 @@ void GNUplotObsParamsWidget::renameGraph(QListWidgetItem* Item)
   if (!m_CurrentGraphName.isEmpty() and Item)
   {
     QString NewGraphName = Item->text();
+
+    if (NewGraphName.count(".") >= 1)
+    {
+      QMessageBox::critical(this, tr("Graph renaming"),tr("A graph name cannot contains dots."), QMessageBox::Close);
+    }
 
     // Perform renaming only if the new graph name is not already used
     if (ui->GraphsListWidget->findItems(NewGraphName,Qt::MatchExactly).size() == 1)
